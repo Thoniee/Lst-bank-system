@@ -8,6 +8,9 @@ export interface IAccount extends Document {
   dateOfBirth: Date;
   accountNumber: string;
   createdAt: Date;
+  cardNumber?: string;
+cvv?: string;
+expiry?: string;
 };
 
 const AccountSchema: Schema = new Schema({
@@ -17,7 +20,13 @@ const AccountSchema: Schema = new Schema({
   phoneNumber: { type: String, required: true },
   dateOfBirth: { type: Date, required: true },
   accountNumber: { type: String, required: true, unique: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+
+
+// Virtual Card Info
+cardNumber: { type: String, unique: true },
+cvv: { type: String },
+expiry: { type: String },
 });
 
 export default mongoose.model<IAccount>('Account', AccountSchema);
